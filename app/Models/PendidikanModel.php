@@ -13,8 +13,12 @@ class PendidikanModel extends Model
     /**
      * Mengambil semua riwayat pendidikan, diurutkan berdasarkan id terbaru (asumsi pendidikan terbaru di atas)
      */
-    public function getPendidikan()
+    public function getPendidikan(int $limit = 0)
     {
-        return $this->orderBy('id', 'DESC')->findAll();
+        if ($limit > 0) {
+            $this->limit($limit);
+        }
+        // Asumsi diurutkan berdasarkan id DESC (terbaru di atas)
+        return $this->orderBy('id', 'DESC')->findAll(); 
     }
 }
